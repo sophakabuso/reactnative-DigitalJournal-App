@@ -2,17 +2,25 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useRecordingContext } from '../context/RecordingContext';
 
-
 const RecordingScreen = () => {
   const { addRecording } = useRecordingContext();
-  const [recording, setRecording] = useState(null);
+  const [isRecording, setIsRecording] = useState(false);
 
   const startRecording = async () => {
-    // Your recording logic here
+    // Simulate starting recording (replace with actual recording logic)
+    console.log('Recording started');
+    setIsRecording(true);
   };
 
   const stopRecording = async () => {
-    // Your stop recording logic here
+    // Simulate stopping recording (replace with actual recording logic)
+    console.log('Recording stopped');
+    setIsRecording(false);
+
+    // Simulate recorded audio data (replace with actual data)
+    const uri = 'path_to_recorded_audio_file';
+    const duration = 5000; // Example duration in milliseconds
+    addRecording(uri, duration);
   };
 
   return (
@@ -24,10 +32,17 @@ const RecordingScreen = () => {
           </Text>
         )}
       </Pressable>
-      {recording && (
+      {isRecording && (
         <Pressable onPress={stopRecording} style={[styles.button, styles.stopButton]}>
           {({ pressed }) => (
-            <Text style={[styles.buttonText, styles.stopButtonText, pressed && styles.buttonTextPressed]}>
+            <Text
+              style={[
+                styles.buttonText,
+                styles.stopButtonText,
+                pressed && styles.buttonTextPressed,
+                { opacity: pressed ? 0.6 : 1 },
+              ]}
+            >
               Stop Recording
             </Text>
           )}
@@ -50,6 +65,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 20,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5,
   },
   stopButton: {
     backgroundColor: '#FF3B30',

@@ -8,15 +8,21 @@ export const useRecordingContext = () => useContext(RecordingContext);
 export const RecordingProvider = ({ children }) => {
   const [recordings, setRecordings] = useState([]);
 
-  const addRecording = (uri, metadata) => {
+  const addRecording = (uri, duration) => {
     setRecordings((prevRecordings) => [
       ...prevRecordings,
-      { uri, ...metadata },
+      { uri, duration },
     ]);
   };
 
+  const deleteRecording = (uriToDelete) => {
+    setRecordings((prevRecordings) =>
+      prevRecordings.filter((recording) => recording.uri !== uriToDelete)
+    );
+  };
+
   return (
-    <RecordingContext.Provider value={{ recordings, addRecording }}>
+    <RecordingContext.Provider value={{ recordings, addRecording, deleteRecording }}>
       {children}
     </RecordingContext.Provider>
   );

@@ -6,7 +6,7 @@ const PlayScreen = ({ route }) => {
 
   return (
     <View>
-      <Text>{note.title}</Text>
+      <Text>{note.uri}</Text>
     </View>
   );
 };

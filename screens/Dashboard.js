@@ -2,25 +2,32 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const VoiceNoteListScreen = () => {
+const Dashboard = () => {
   const navigation = useNavigation();
 
-  const handleNavigateToRecording = () => {
+  const navigateToVoiceNoteList = () => {
+    navigation.navigate('VoiceNoteList');
+  };
+
+  const navigateToRecording = () => {
     navigation.navigate('Record');
   };
 
-  const handleNavigateToPlay = () => {
+  const navigateToPlay = () => {
     navigation.navigate('Play', { note: { title: 'Sample Note' } });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Voice Note List</Text>
-      <TouchableOpacity style={styles.button} onPress={handleNavigateToRecording}>
-        <Text style={styles.buttonText}>Record a Voice Note</Text>
+      <Text style={styles.title}>Voice Journal App</Text>
+      <TouchableOpacity style={styles.button} onPress={navigateToVoiceNoteList}>
+        <Text style={styles.buttonText}>Voice Note List</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleNavigateToPlay}>
-        <Text style={styles.buttonText}>Play a Voice Note</Text>
+      <TouchableOpacity style={styles.button} onPress={navigateToRecording}>
+        <Text style={styles.buttonText}>Record Voice Note</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={navigateToPlay}>
+        <Text style={styles.buttonText}>Play Voice Note</Text>
       </TouchableOpacity>
     </View>
   );
@@ -52,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default VoiceNoteListScreen;
+export default Dashboard;
