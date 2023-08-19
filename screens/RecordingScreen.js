@@ -72,10 +72,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#1E1E1E',
+    backgroundColor: '#121212', // Dark background color
   },
   button: {
-    backgroundColor: '#3E9BF7',
+    backgroundColor: '#3E9BF7', // Light blue button
     padding: 15,
     borderRadius: 8,
     marginBottom: 20,
@@ -87,14 +87,24 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   stopButton: {
-    backgroundColor: '#FF3B30',
+    backgroundColor: '#FF3B30', // Red button for stop recording
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
+    fontSize: 16,
   },
   stopButtonText: {
-    color: '#1E1E1E',
+    color: 'white',
   },
   buttonTextPressed: {
     opacity: 0.6,

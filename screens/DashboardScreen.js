@@ -13,18 +13,14 @@ const DashboardScreen = () => {
     navigation.navigate('Recording');
   };
 
-  const navigateToPlay = () => {
-    navigation.navigate('Play', { note: { title: 'Sample Note' } });
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Voice Journal App</Text>
+      <Text style={styles.title}>My Voice Journal</Text>
       <TouchableOpacity style={styles.button} onPress={navigateToVoiceNoteList}>
-        <Text style={styles.buttonText}>Voice Note List</Text>
+        <Text style={styles.buttonText}>View Voice Notes</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={navigateToRecording}>
-        <Text style={styles.buttonText}>Record Voice Note</Text>
+        <Text style={styles.buttonText}>Record a Note</Text>
       </TouchableOpacity>
     </View>
   );
@@ -35,24 +31,34 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#121212', // Dark background color
   },
   title: {
-    fontSize: 24,
+    fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: 'white', // Title text color
+    textShadowColor: 'rgba(0, 0, 0, 0.5)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 4,
   },
   button: {
-    backgroundColor: '#3E9BF7',
-    padding: 15,
+    backgroundColor: '#3E9BF7', // Light blue button
+    paddingVertical: 15,
+    paddingHorizontal: 20,
     borderRadius: 8,
-    marginBottom: 10,
-    width: 200,
+    marginBottom: 15,
     alignItems: 'center',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 

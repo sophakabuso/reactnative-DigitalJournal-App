@@ -40,7 +40,7 @@ const PlayScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Playing: {note.uri}</Text>
+      <Text style={styles.playingText}>Now Playing: {note.uri}</Text>
       <View style={styles.controls}>
         <Pressable style={styles.button} onPress={togglePlayback}>
           <Text style={styles.buttonText}>{isPlaying ? 'Pause' : 'Play'}</Text>
@@ -55,16 +55,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#121212', // Dark background color
+  },
+  playingText: {
+    color: 'white',
+    fontSize: 18,
+    marginBottom: 20,
   },
   controls: {
     flexDirection: 'row',
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#3E9BF7',
-    padding: 10,
+    backgroundColor: '#3E9BF7', // Light blue button
+    padding: 15,
     borderRadius: 8,
+    marginBottom: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5,
   },
   buttonText: {
     color: 'white',

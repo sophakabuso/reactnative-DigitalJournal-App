@@ -16,22 +16,29 @@ const VoiceNoteListScreen = () => {
     navigation.navigate('Play', { note });
   };
 
+  const renderVoiceNoteItem = ({ item }) => (
+    <VoiceNoteItem
+      note={item}
+      onPress={() => handleNavigateToPlay(item)}
+      onDelete={() => deleteRecording(item.uri)}
+      onMoreInfo={() => handleNavigateToMoreInfo(item)}
+    />
+  );
+
+  const handleNavigateToMoreInfo = (note) => {
+    navigation.navigate('MoreInfo', { note });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Voice Note List</Text>
-      <Pressable style={styles.button} onPress={handleNavigateToRecording}>
-        <Text style={styles.buttonText}>Record a Voice Note</Text>
+      <Pressable style={styles.recordButton} onPress={handleNavigateToRecording}>
+        <Text style={styles.recordButtonText}>Record a Voice Note</Text>
       </Pressable>
       <FlatList
         data={recordings}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <VoiceNoteItem
-            note={item}
-            onPress={() => handleNavigateToPlay(item)}
-            onDelete={() => deleteRecording(item.uri)}
-          />
-        )}
+        renderItem={renderVoiceNoteItem}
       />
     </View>
   );
@@ -40,25 +47,28 @@ const VoiceNoteListScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1E1E1E', // Dark background color
+    padding: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    color: 'white', // Title text color
   },
-  button: {
+  recordButton: {
     backgroundColor: '#3E9BF7',
     padding: 15,
     borderRadius: 8,
-    marginBottom: 10,
-    width: 200,
+    marginBottom: 20,
     alignItems: 'center',
   },
-  buttonText: {
+  recordButtonText: {
     color: 'white',
+    fontWeight: 'bold',
+  },
+  highlightText: {
+    color: '#3E9BF7', // Light blue color for highlights
     fontWeight: 'bold',
   },
 });
