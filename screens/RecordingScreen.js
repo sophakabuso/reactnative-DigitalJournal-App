@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
+import { Audio } from 'expo-av';
+
 import { useRecordingContext } from '../context/RecordingContext';
-import { Audio, RecordingOptionsPreset } from 'expo-av';
 
 const RecordingScreen = () => {
   const { addRecording } = useRecordingContext();
@@ -11,7 +12,7 @@ const RecordingScreen = () => {
   const startRecording = async () => {
     try {
       const recordingObject = new Audio.Recording();
-      await recordingObject.prepareToRecordAsync(RecordingOptionsPreset.HighQuality);
+      await recordingObject.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
       await recordingObject.startAsync();
       setRecording(recordingObject);
       setIsRecording(true);
@@ -52,7 +53,10 @@ const RecordingScreen = () => {
               styles.buttonText,
               isRecording && styles.stopButtonText,
               pressed && styles.buttonTextPressed,
-              { opacity: pressed ? 0.6 : 1 },
+              {
+                opacity: pressed ? 0.6 : 1,
+                transform: [{ scale: pressed ? 0.95 : 1 }],
+              },
             ]}
           >
             {isRecording ? 'Stop Recording' : 'Start Recording'}

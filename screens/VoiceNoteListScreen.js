@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, Pressable, StyleSheet, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useRecordingContext } from '../context/RecordingContext';
 import VoiceNoteItem from '../components/VoiceNoteItem';
@@ -19,9 +19,9 @@ const VoiceNoteListScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Voice Note List</Text>
-      <TouchableOpacity style={styles.button} onPress={handleNavigateToRecording}>
+      <Pressable style={styles.button} onPress={handleNavigateToRecording}>
         <Text style={styles.buttonText}>Record a Voice Note</Text>
-      </TouchableOpacity>
+      </Pressable>
       <FlatList
         data={recordings}
         keyExtractor={(item, index) => index.toString()}
