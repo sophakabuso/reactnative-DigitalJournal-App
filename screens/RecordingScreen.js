@@ -1,53 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { useRecordingContext } from '../context/RecordingContext';
+import { Audio, RecordingOptionsPreset } from 'expo-av';
 
 const RecordingScreen = () => {
   const { addRecording } = useRecordingContext();
   const [isRecording, setIsRecording] = useState(false);
+  const [recording, setRecording] = useState(null);
 
   const startRecording = async () => {
-    // Simulate starting recording (replace with actual recording logic)
-    console.log('Recording started');
-    setIsRecording(true);
+    try {
+      const recordingObject = new Audio.Recording();
+      await recordingObject.prepareToRecordAsync(RecordingOptionsPreset.HighQuality);
+      await recordingObject.startAsync();
+      setRecording(recordingObject);
+      setIsRecording(true);
+    } catch (error) {
+      console.error('Failed to start recording:', error);
+    }
   };
 
   const stopRecording = async () => {
-    // Simulate stopping recording (replace with actual recording logic)
-    console.log('Recording stopped');
-    setIsRecording(false);
-
-    // Simulate recorded audio data (replace with actual data)
-    const uri = 'path_to_recorded_audio_file';
-    const duration = 5000; // Example duration in milliseconds
-    addRecording(uri, duration);
+    if (recording) {
+      try {
+        await recording.stopAndUnloadAsync();
+        const uri = recording.getURI();
+        const { durationMillis } = await recording.getStatusAsync();
+        addRecording(uri, durationMillis);
+        setRecording(null);
+        setIsRecording(false);
+      } catch (error) {
+        console.error('Failed to stop recording:', error);
+      }
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      if (recording) {
+        recording.stopAndUnloadAsync();
+      }
+    };
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={startRecording} style={styles.button}>
+      <Pressable onPress={isRecording ? stopRecording : startRecording} style={isRecording ? styles.stopButton : styles.button}>
         {({ pressed }) => (
-          <Text style={[styles.buttonText, pressed && styles.buttonTextPressed]}>
-            Start Recording
+          <Text
+            style={[
+              styles.buttonText,
+              isRecording && styles.stopButtonText,
+              pressed && styles.buttonTextPressed,
+              { opacity: pressed ? 0.6 : 1 },
+            ]}
+          >
+            {isRecording ? 'Stop Recording' : 'Start Recording'}
           </Text>
         )}
       </Pressable>
-      {isRecording && (
-        <Pressable onPress={stopRecording} style={[styles.button, styles.stopButton]}>
-          {({ pressed }) => (
-            <Text
-              style={[
-                styles.buttonText,
-                styles.stopButtonText,
-                pressed && styles.buttonTextPressed,
-                { opacity: pressed ? 0.6 : 1 },
-              ]}
-            >
-              Stop Recording
-            </Text>
-          )}
-        </Pressable>
-      )}
     </View>
   );
 };

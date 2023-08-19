@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const Dashboard = () => {
+const DashboardScreen = () => {
   const navigation = useNavigation();
 
   const navigateToVoiceNoteList = () => {
@@ -10,7 +10,7 @@ const Dashboard = () => {
   };
 
   const navigateToRecording = () => {
-    navigation.navigate('Record');
+    navigation.navigate('Recording');
   };
 
   const navigateToPlay = () => {
@@ -25,9 +25,6 @@ const Dashboard = () => {
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={navigateToRecording}>
         <Text style={styles.buttonText}>Record Voice Note</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={navigateToPlay}>
-        <Text style={styles.buttonText}>Play Voice Note</Text>
       </TouchableOpacity>
     </View>
   );
@@ -59,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Dashboard;
+export default DashboardScreen;

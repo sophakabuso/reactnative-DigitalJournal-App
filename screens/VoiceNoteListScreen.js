@@ -1,16 +1,19 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useRecordingContext } from '../context/RecordingContext';
+import VoiceNoteItem from '../components/VoiceNoteItem';
 
 const VoiceNoteListScreen = () => {
   const navigation = useNavigation();
+  const { recordings, deleteRecording } = useRecordingContext();
 
   const handleNavigateToRecording = () => {
-    navigation.navigate('Record');
+    navigation.navigate('Recording');
   };
 
-  const handleNavigateToPlay = () => {
-    navigation.navigate('Play', { note: { title: 'Sample Note' } });
+  const handleNavigateToPlay = (note) => {
+    navigation.navigate('Play', { note });
   };
 
   return (
@@ -19,9 +22,17 @@ const VoiceNoteListScreen = () => {
       <TouchableOpacity style={styles.button} onPress={handleNavigateToRecording}>
         <Text style={styles.buttonText}>Record a Voice Note</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={handleNavigateToPlay}>
-        <Text style={styles.buttonText}>Play a Voice Note</Text>
-      </TouchableOpacity>
+      <FlatList
+        data={recordings}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <VoiceNoteItem
+            note={item}
+            onPress={() => handleNavigateToPlay(item)}
+            onDelete={() => deleteRecording(item.uri)}
+          />
+        )}
+      />
     </View>
   );
 };

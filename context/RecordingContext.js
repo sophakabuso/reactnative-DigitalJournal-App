@@ -17,7 +17,7 @@ export const RecordingProvider = ({ children }) => {
 
   const deleteRecording = (uriToDelete) => {
     setRecordings((prevRecordings) =>
-      prevRecordings.filter((recording) => recording.uri !== uriToDelete)
+      prevRecordings.filter((recordings) => recordings.uri !== uriToDelete)
     );
   };
 

@@ -1,22 +1,23 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Dashboard from '../screens/Dashboard'; // Update import path
-import VoiceNoteListScreen from '../screens/VoiceNoteListScreen'; // Update import path
-import RecordingScreen from '../screens/RecordingScreen'; // Update import path
-import PlayScreen from '../screens/PlayScreen'; // Update import path
+import DashboardScreen from '../screens/DashboardScreen';
+import VoiceNoteListScreen from '../screens/VoiceNoteListScreen';
+import RecordingScreen from '../screens/RecordingScreen';
+import PlayScreen from '../screens/PlayScreen';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="Dashboard">
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-      <Stack.Screen name="VoiceNoteList" component={VoiceNoteListScreen} />
-      <Stack.Screen name="Record" component={RecordingScreen} />
-      <Stack.Screen name="Play" component={PlayScreen} />
+      <Stack.Screen name="Dashboard" component={DashboardScreen} options={{ title: 'Voice Journal App' }} />
+      <Stack.Screen name="VoiceNoteList" component={VoiceNoteListScreen} options={{ title: 'Voice Notes List' }} />
+      <Stack.Screen name="Recording" component={RecordingScreen} options={{ title: 'Record Voice Note' }} />
+      <Stack.Screen name="Play" component={PlayScreen} options={{ title: 'Play Voice Note' }} />
     </Stack.Navigator>
   );
 };
 
 export default AppNavigator;
+

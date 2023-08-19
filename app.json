@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "reactnative-DigitalJournal-App",
-    "slug": "reactnative-DigitalJournal-App",
+    "name": "reactnative-Voice-Journal-App",
+    "slug": "reactnative-Voice-Journal-App",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
